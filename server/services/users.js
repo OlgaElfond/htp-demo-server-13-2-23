@@ -1,7 +1,7 @@
 const { readFileSync, writeFileSync } = require("fs");
 const path = require("path"); //
 
-function getUser() {
+function getUsers() {
   const value = JSON.parse(
     // __dirname environment param
     readFileSync(path.resolve(__dirname, "../../users.json"))
@@ -10,13 +10,24 @@ function getUser() {
 }
 //1 function create new user
 
+function getUserById(userId) {
+  // get the user data
+  const currentUsers = getUsers();
+  //find user in user data
+  const existingUser = currentUsers.find((userEx) => userEx.id === userId);
+  console.log(existingUser);
+  // return user
+  return existingUser;
+}
+
 function setUser(user) {
   const value = JSON.stringify(user);
   writeFileSync("./users.json", value);
 }
+
 // register
 function register(user) {
-  const currentUsers = getUser();
+  const currentUsers = getUsers();
   const existingUser = currentUsers.find(
     (userEx) => userEx.username === user.username
   );
@@ -32,7 +43,7 @@ function register(user) {
 //2 function checking user
 
 function login(loginUser) {
-  const allUsersData = getUser();
+  const allUsersData = getUsers();
   const matchUser = allUsersData.find(
     (user) =>
       user.username === loginUser.username &&
@@ -45,4 +56,5 @@ function login(loginUser) {
 module.exports = {
   register,
   login,
+  getUserById,
 };

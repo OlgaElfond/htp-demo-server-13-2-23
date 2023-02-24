@@ -20,4 +20,6 @@ function login(req, res) {
   }
 }
 
-module.exports = { register, login };
+function getUserById(req, res) {}
+
+module.exports = { register, login, getUserById };

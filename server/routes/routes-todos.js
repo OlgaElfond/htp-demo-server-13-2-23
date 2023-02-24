@@ -18,13 +18,15 @@ module.exports = function (app) {
   //   next();
   // });
 
+  const auth = require("../middleware/auth");
+
   const todosController = require("../controllers/controllers-todos");
 
-  app.get("/api/todos/:userId", todosController.getTodosByUserId);
+  app.get("/api/todos/", auth, todosController.getTodosByUserId);
 
   app.delete("/api/todos/:id", todosController.deleteTodo);
 
-  app.put("/api/todos/:id", todosController.updateTodo);
+  app.put("/api/todos/:id", auth, todosController.updateTodo);
 
   // app.put("/api/todos/:id", (req, res) => {
   //   const { id } = req.params;
