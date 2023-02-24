@@ -27,7 +27,7 @@ async function showTodos() {
 
 function createDataRow(todoObject) {
   //create tr
-  //for each property of object creat td with data
+  //for each property of object create td with data
   // add td to tr
   //add tr to table
   //console.log(todoObject);

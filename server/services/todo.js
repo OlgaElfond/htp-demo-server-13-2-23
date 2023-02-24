@@ -1,9 +1,16 @@
 const { readFileSync, writeFileSync } = require("fs");
 
-// read the file todos.txt and return an array of todos.
-function getTodos() {
-  const value = JSON.parse(readFileSync("./data.json").toString());
+// read the file todos.txt and return an array of todos
+// function getTodos() {
+//   const value = JSON.parse(readFileSync("./data.json").toString());
+//   return value;
+// }
 
+// new function return todos by user id
+function getTodosByUserId(userId) {
+  const value = JSON.parse(readFileSync("./data.json")).filter(
+    (todo) => todo.userId === userId
+  );
   return value;
 }
 
@@ -17,6 +24,7 @@ function addTodo(toDo) {
   toDo.id = btoa(Math.random());
   currentTodos.push(
     toDo
+
     //   {
     //   id: btoa(Math.random()),
     //   title: "",
@@ -57,7 +65,7 @@ function updateTodo(id, newObjData) {
 }
 
 module.exports = {
-  getTodos,
+  getTodosByUserId,
   addTodo,
   deleteTodo,
   updateTodo,
