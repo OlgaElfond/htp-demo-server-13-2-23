@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
     if (userService.getUserById(userId)) {
       next();
     } else {
+      console.log("jjj");
       return res.status(403).send("Access denied.");
     }
   }

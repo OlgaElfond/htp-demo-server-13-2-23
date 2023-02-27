@@ -24,6 +24,8 @@ module.exports = function (app) {
 
   app.get("/api/todos/", auth, todosController.getTodosByUserId);
 
+  app.get("/api/todos/all", todosController.getTodosByUserId);
+
   app.delete("/api/todos/:id", todosController.deleteTodo);
 
   app.put("/api/todos/:id", auth, todosController.updateTodo);

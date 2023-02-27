@@ -1,10 +1,10 @@
 const { readFileSync, writeFileSync } = require("fs");
 
 // read the file todos.txt and return an array of todos
-// function getTodos() {
-//   const value = JSON.parse(readFileSync("./data.json").toString());
-//   return value;
-// }
+function getTodos() {
+  const value = JSON.parse(readFileSync("./data.json").toString());
+  return value;
+}
 
 // new function return todos by user id
 function getTodosByUserId(userId) {

@@ -8,15 +8,12 @@ function getUsers() {
   );
   return value;
 }
-//1 function create new user
 
 function getUserById(userId) {
-  // get the user data
   const currentUsers = getUsers();
-  //find user in user data
   const existingUser = currentUsers.find((userEx) => userEx.id === userId);
   console.log(existingUser);
-  // return user
+
   return existingUser;
 }
 
@@ -25,7 +22,6 @@ function setUser(user) {
   writeFileSync("./users.json", value);
 }
 
-// register
 function register(user) {
   const currentUsers = getUsers();
   const existingUser = currentUsers.find(
@@ -40,7 +36,7 @@ function register(user) {
     return null;
   }
 }
-//2 function checking user
+// function checking user
 
 function login(loginUser) {
   const allUsersData = getUsers();

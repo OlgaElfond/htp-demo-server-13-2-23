@@ -7,7 +7,7 @@
 // }
 
 async function getTodosFromServerAsync() {
-  const response = await fetch("http://localhost:3000/api/todos/", {});
+  const response = await fetch("http://localhost:3000/api/todos/all", {});
   const todos = await response.json();
   //console.log(todos);
   return todos;
