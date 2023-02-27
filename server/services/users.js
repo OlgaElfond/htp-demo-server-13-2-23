@@ -1,37 +1,35 @@
-const { readFileSync, writeFileSync } = require("fs");
-const path = require("path"); //
+const { writeFile, readFile } = require("fs/promises");
+const path = require("path");
 
-function getUsers() {
+async function getUsers() {
   const value = JSON.parse(
-    // __dirname environment param
-    //readFileSync(path.resolve(__dirname, "../../users.json"))
-    readFileSync(path.resolve(__dirname, "../data/users.json"))
+    await readFile(path.resolve(__dirname, "../data/users.json"))
   );
   return value;
 }
 
-function getUserById(userId) {
-  const currentUsers = getUsers();
+async function getUserById(userId) {
+  const currentUsers = await getUsers();
   const existingUser = currentUsers.find((userEx) => userEx.id === userId);
   console.log(existingUser);
 
   return existingUser;
 }
 
-function setUser(user) {
+async function setUser(user) {
   const value = JSON.stringify(user);
-  writeFileSync(path.resolve(__dirname, "../data/users.json"), value);
+  await writeFile(path.resolve(__dirname, "../data/users.json"), value);
 }
 
-function register(user) {
-  const currentUsers = getUsers();
+async function register(user) {
+  const currentUsers = await getUsers();
   const existingUser = currentUsers.find(
     (userEx) => userEx.username === user.username
   );
   if (!existingUser) {
     user.id = btoa(Math.random());
     currentUsers.push(user);
-    setUser(currentUsers);
+    await setUser(currentUsers);
     return user;
   } else {
     return null;
@@ -39,8 +37,8 @@ function register(user) {
 }
 // function checking user
 
-function login(loginUser) {
-  const allUsersData = getUsers();
+async function login(loginUser) {
+  const allUsersData = await getUsers();
   const matchUser = allUsersData.find(
     (user) =>
       user.username === loginUser.username &&
