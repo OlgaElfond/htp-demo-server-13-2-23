@@ -6,11 +6,10 @@ function getTodos(req, res) {
 }
 
 function getTodosByUserId(req, res) {
-  const userId = req.header("userautorizathion");
+  const userId = req.header("userautorizathion"); // postman headers userautorizathion = user id
   console.log("user", userId);
   const todos = todosService.getTodosByUserId(userId);
   res.json(todos);
-  console.log(req.query);
 }
 
 function deleteTodo(req, res) {

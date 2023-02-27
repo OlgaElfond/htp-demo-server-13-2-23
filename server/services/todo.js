@@ -1,22 +1,26 @@
 const { readFileSync, writeFileSync } = require("fs");
+const path = require("path");
 
-// read the file todos.txt and return an array of todos
+// read the file todos and return an array of todos
 function getTodos() {
-  const value = JSON.parse(readFileSync("./data.json").toString());
+  const value = JSON.parse(
+    readFileSync(path.resolve(__dirname, "../data/data.json"))
+  );
   return value;
 }
 
 // new function return todos by user id
 function getTodosByUserId(userId) {
-  const value = JSON.parse(readFileSync("./data.json")).filter(
-    (todo) => todo.userId === userId
-  );
+  const value = JSON.parse(
+    readFileSync(path.resolve(__dirname, "../data/data.json"))
+  ).filter((todo) => todo.userId === userId);
+  console.log(__dirname);
   return value;
 }
 
 function setTodos(todos) {
   const value = JSON.stringify(todos);
-  writeFileSync("./data.json", value);
+  writeFileSync(path.resolve(__dirname, "../data/data.json"), value);
 }
 
 function addTodo(toDo) {

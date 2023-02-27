@@ -4,7 +4,8 @@ const path = require("path"); //
 function getUsers() {
   const value = JSON.parse(
     // __dirname environment param
-    readFileSync(path.resolve(__dirname, "../../users.json"))
+    //readFileSync(path.resolve(__dirname, "../../users.json"))
+    readFileSync(path.resolve(__dirname, "../data/users.json"))
   );
   return value;
 }
@@ -19,7 +20,7 @@ function getUserById(userId) {
 
 function setUser(user) {
   const value = JSON.stringify(user);
-  writeFileSync("./users.json", value);
+  writeFileSync(path.resolve(__dirname, "../data/users.json"), value);
 }
 
 function register(user) {
@@ -53,4 +54,5 @@ module.exports = {
   register,
   login,
   getUserById,
+  getUsers,
 };

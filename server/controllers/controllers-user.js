@@ -22,4 +22,9 @@ function login(req, res) {
 
 function getUserById(req, res) {}
 
-module.exports = { register, login, getUserById };
+function getUsers(req, res) {
+  const users = res.body;
+  res.json(userService.getUsers(users));
+}
+
+module.exports = { register, login, getUserById, getUsers };

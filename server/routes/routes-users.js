@@ -4,4 +4,6 @@ module.exports = function (app) {
   app.post("/api/users/", userService.register);
 
   app.get("/api/users/", userService.login);
+
+  app.get("/api/users/all", userService.getUsers);
 };
