@@ -8,11 +8,12 @@ async function getUsers() {
   return value;
 }
 
+console.log(getUsers());
+
 async function getUserById(userId) {
   const currentUsers = await getUsers();
   const existingUser = currentUsers.find((userEx) => userEx.id === userId);
   console.log(existingUser);
-
   return existingUser;
 }
 
@@ -35,6 +36,13 @@ async function register(user) {
     return null;
   }
 }
+async function removeUser(userToDelete) {
+  const currentUsers = await getUsers();
+  let newUsers = currentUsers.filter((user) => user.id !== userToDelete);
+  //console.log(newUsers);
+  await setUser(newUsers);
+  return newUsers;
+}
 // function checking user
 
 async function login(loginUser) {
@@ -53,4 +61,5 @@ module.exports = {
   login,
   getUserById,
   getUsers,
+  removeUser,
 };

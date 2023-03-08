@@ -1,33 +1,34 @@
 const todosService = require("../services/todo");
 
-function getTodos(req, res) {
+async function getTodos(req, res) {
   const todos = res.body;
-  res.json(todosService.getTodos(todos));
+   res.json( await todosService.getTodos(todos));
 }
 
-function getTodosByUserId(req, res) {
+async function getTodosByUserId(req, res) {
   const userId = req.header("userautorizathion"); // postman headers userautorizathion = user id
-  console.log("user", userId);
-  const todos = todosService.getTodosByUserId(userId);
+  const todos = await todosService.getTodosByUserId(userId);
   res.json(todos);
 }
 
-function deleteTodo(req, res) {
+async function deleteTodo(req, res) {
   const { id } = req.params;
-  res.json(todosService.deleteTodo(id));
+  res.json(await todosService.deleteTodo(id));
 }
 
-function updateTodo(req, res) {
+async function updateTodo(req, res) {
   const { id } = req.params;
   const todoToUpdate = req.body;
   console.log(todoToUpdate);
-  res.json(todosService.updateTodo(id, todoToUpdate));
+  res.json(await todosService.updateTodo(id, todoToUpdate));
 }
 
-function addTodo(req, res) {
+async function addTodo(req, res) {
   let toDo = req.body;
   console.log(toDo);
-  res.json(todosService.addTodo(toDo));
+  const user = req.user; // add user id to new todo
+  toDo.user = user.id; // add user id to new todo
+  res.json(await todosService.addTodo(toDo));
 }
 module.exports = {
   getTodosByUserId,
