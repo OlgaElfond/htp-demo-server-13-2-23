@@ -14,7 +14,14 @@ async function register(req, res) {
 async function login(req, res) {
   const loginDetails = req.body;
   const userInfo = await userService.login(loginDetails);
+
   if (userInfo) {
+    const cookieOptions = {
+      sameSite: "None",
+      secure: true,
+    };
+
+    res.cookie("userInfo", JSON.stringify(userInfo), cookieOptions);
     res.json(userInfo);
   } else {
     res.status(401).json({ message: "Unauthorized" });

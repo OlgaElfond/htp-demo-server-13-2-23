@@ -8,12 +8,10 @@ async function getUsers() {
   return value;
 }
 
-console.log(getUsers());
-
 async function getUserById(userId) {
   const currentUsers = await getUsers();
   const existingUser = currentUsers.find((userEx) => userEx.id === userId);
-  console.log(existingUser);
+
   return existingUser;
 }
 
@@ -39,7 +37,7 @@ async function register(user) {
 async function removeUser(userToDelete) {
   const currentUsers = await getUsers();
   let newUsers = currentUsers.filter((user) => user.id !== userToDelete);
-  //console.log(newUsers);
+
   await setUser(newUsers);
   return newUsers;
 }
@@ -53,7 +51,13 @@ async function login(loginUser) {
       user.password === loginUser.password
   );
   console.log("user", matchUser);
-  return matchUser;
+  let userInfo = {};
+  if (matchUser) {
+    userInfo.id = matchUser.id;
+    userInfo.admin = matchUser.admin;
+  }
+
+  return userInfo;
 }
 
 module.exports = {

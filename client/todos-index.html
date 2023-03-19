@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./todoclient.js"></script>
+    <style>
+      body {
+        min-height: 100vh;
+      }
+      body {
+        background-color: #e4e5e7;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      table {
+        border: 1px solid;
+        border-collapse: collapse;
+        margin-bottom: 1em;
+      }
+
+      th,
+      td {
+        border: 1px solid;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>ToDo List</div>
+    </div>
+    <div>
+      <table class="tabel-Todos" id="tabelTodos">
+        <thead>
+          <th>id</th>
+          <th>title</th>
+          <th>description</th>
+          <th>user</th>
+          <th>isDone</th>
+          <th>category</th>
+          <th>priority</th>
+          <th>user id</th>
+        </thead>
+      </table>
+    </div>
+  </body>
+</html>

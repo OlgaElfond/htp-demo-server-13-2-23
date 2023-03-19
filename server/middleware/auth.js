@@ -1,12 +1,12 @@
 const userService = require("../services/users");
 
 async function loginUserAutorizathion(req, res, next) {
-  const userId = req.header("userautorizathion");
-  console.log(userId);
-  if (!userId) {
+  const userInfo = req.cookies["userInfo"];
+  if (!userInfo) {
     return res.status(403).send("Access denied.");
   } else {
-    if (await userService.getUserById(userId)) {
+    let userInfoCookiesObject = JSON.parse(userInfo);
+    if (await userService.getUserById(userInfoCookiesObject.id)) {
       next();
     } else {
       console.log("jjj");
@@ -16,12 +16,13 @@ async function loginUserAutorizathion(req, res, next) {
 }
 
 async function loginAdminAutorizathion(req, res, next) {
-  const userId = req.header("userautorizathion");
-  if (!userId) {
+  const userInfo = req.cookies["userInfo"];
+  if (!userInfo) {
     return res.status(403).send("Access denied.");
   } else {
-    let isAdmin = await userService.getUserById(userId);
-    if (isAdmin.admin) {
+    let userInfoCookiesObject = JSON.parse(userInfo);
+    let user = await userService.getUserById(userInfoCookiesObject.id);
+    if (user.admin) {
       next();
     } else {
       console.log("jjj");

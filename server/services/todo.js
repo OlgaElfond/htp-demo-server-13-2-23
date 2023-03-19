@@ -6,6 +6,7 @@ async function getTodos() {
   const value = JSON.parse(
     await readFile(path.resolve(__dirname, "../data/data.json"))
   );
+
   return value;
 }
 
@@ -14,7 +15,7 @@ async function getTodosByUserId(userId) {
   const value = JSON.parse(
     await readFile(path.resolve(__dirname, "../data/data.json"))
   ).filter((todo) => todo.userId === userId);
-  console.log(__dirname);
+
   return value;
 }
 

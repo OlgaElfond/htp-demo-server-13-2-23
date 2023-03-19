@@ -1,8 +1,5 @@
 module.exports = function (app) {
-  const {
-    loginUserAutorizathion,
-    loginAdminAutorizathion,
-  } = require("../middleware/auth");
+  const { loginAdminAutorizathion } = require("../middleware/auth");
 
   const userService = require("../controllers/controllers-user");
 
@@ -15,6 +12,4 @@ module.exports = function (app) {
     loginAdminAutorizathion,
     userService.removeUser
   );
-
-  //app.get("/api/users/all", userService.getUsers);
 };

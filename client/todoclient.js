@@ -1,26 +1,35 @@
-// function getTodosFromServer() {
-//   return fetch("http://localhost:3000/api/todos/")
-//     .then((response) => response.json())
-//     .then((data) => {
-//       return data;
-//     });
-// }
-
-// Axios with Async/Await -----------------------------------------------------------------------------------------???
-//npm install axios
-//import axios from 'axios';
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
 
 async function getTodosFromServerAsync() {
-  const response = await fetch("http://localhost:3000/api/todos/all", {});
+  let userInfoCookiesObject = JSON.parse(
+    decodeURIComponent(getCookie("userInfo"))
+  );
+
+  let url = "http://localhost:3000/api/todos";
+
+  if (userInfoCookiesObject.admin) {
+    url = "http://localhost:3000/api/todos/all";
+  }
+  const response = await fetch(url, {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
   const todos = await response.json();
-  //console.log(todos);
   return todos;
 }
 
 async function showTodos() {
   //getTodosFromServer().then((returntodosdata) => console.log(returntodosdata));
   let dataList = await getTodosFromServerAsync();
-  //console.log(data);
   //return each object
   let table = document.querySelector("#tabelTodos");
   dataList.forEach((todo) => {
@@ -30,11 +39,6 @@ async function showTodos() {
 }
 
 function createDataRow(todoObject) {
-  //create tr
-  //for each property of object create td with data
-  // add td to tr
-  //add tr to table
-  //console.log(todoObject);
   let tr = document.createElement("tr");
   for (const prop in todoObject) {
     if (Object.hasOwn(todoObject, prop)) {
@@ -45,4 +49,5 @@ function createDataRow(todoObject) {
   }
   return tr;
 }
+
 showTodos();
